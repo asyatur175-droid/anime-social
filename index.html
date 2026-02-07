@@ -2,107 +2,36 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-    <title>Anime Social</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Social</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SECURITY -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self';">
+  
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
 
-        <!-- SECURITY -->
-          <meta http-equiv="Content-Security-Policy"
-                  content="default-src 'self'; script-src 'self'; style-src 'self';">
+  <header class="topbar">
+    <div class="logo">ANIME<span>SOCIAL</span></div>
+    <nav>
+      <a href="#">Keşfet</a>
+      <a href="#">Topluluk</a>
+      <a href="login.html" class="btn">Giriş</a>
+    </nav>
+  </header>
 
-                    <link rel="stylesheet" href="css/main.css">
-                    </head>
-                    <body>
+  <main class="hero">
+    <h1>Karanlık Tarafına Hoş Geldin</h1>
+    <p>Anime severler için güvenli, gerçek ve sosyal bir evren.</p>
+    <a href="login.html" class="cta">Hesap Oluştur</a>
+  </main>
 
-                    <header class="topbar">
-                      <div class="logo">ANIME<span>SOCIAL</span></div>
-                        <nav>
-                            <a href="#">Keşfet</a>
-                                <a href="#">Topluluk</a>
-                                    <a href="login.html" class="btn">Giriş</a>
-                                      </nav>
-                                      </header>
+  <footer>
+    © 2026 Anime Social
+  </footer>
 
-                                      <main class="hero">
-                                        <h1>Karanlık Tarafına Hoş Geldin</h1>
-                                          <p>Anime severler için güvenli, gerçek ve sosyal bir evren.</p>
-                                            <a href="login.html" class="cta">Hesap Oluştur</a>
-                                            </main>
-
-                                            <footer>
-                                              © 2026 Anime Social
-                                              </footer>
-
-                                              <script type="module" src="js/app.js"></script>
-                                              </body>
-                                              </html><!DOCTYPE html>
-                                              <html lang="tr">
-                                              <head>
-                                                <meta charset="UTF-8">
-                                                  <title>Giriş | Anime Social</title>
-                                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-                                                      <meta http-equiv="Content-Security-Policy"
-                                                              content="default-src 'self'; script-src 'self'; style-src 'self';">
-
-                                                                <link rel="stylesheet" href="css/main.css">
-                                                                </head>
-                                                                <body>
-
-                                                                <main class="hero">
-                                                                  <h1>Giriş Yap</h1>
-
-                                                                    <form id="loginForm" autocomplete="off">
-                                                                        <input type="email" id="email" placeholder="E-posta" required>
-                                                                            <input type="password" id="password" placeholder="Şifre" required minlength="8">
-                                                                                <button class="cta" type="submit">Giriş</button>
-                                                                                  </form>
-                                                                                  </main>
-
-                                                                                  <script type="module" src="js/app.js"></script>
-                                                                                  </body>
-                                                                                  </html>import "./security.js";
-                                                                                  import "./auth.js";
-
-                                                                                  console.log("Anime Social core loaded");// Rate limit
-                                                                                  let lastAction = 0;
-
-                                                                                  export function canAct() {
-                                                                                    const now = Date.now();
-                                                                                      if (now - lastAction < 3000) return false;
-                                                                                        lastAction = now;
-                                                                                          return true;
-                                                                                          }
-
-                                                                                          // Safe text (XSS shield)
-                                                                                          export function safeText(text) {
-                                                                                            const div = document.createElement("div");
-                                                                                              div.textContent = text;
-                                                                                                return div.textContent;
-                                                                                                }import { canAct } from "
-                                                                                                const form = document.getElementById("loginForm");
-
-                                                                                                if (form) {
-                                                                                                  form.addEventListener("submit", e => {
-                                                                  
-
-                                                                                                          if (!canAct()) {
-                                                                                                                alert("Yavaş ol 😄");
-                                                                                                                      return;
-                                                                                                                          }
-
-                                                                                                                              const email = document.getElementById("email").value.trim();
-                                                                                                                                  const password = document.getElementById("password").value;
-
-                                                                                                                                      if (!email.includes("@")) {
-                                                                                                                                            alert("Geçersiz e-posta");
-                                                                                                                                                  return;
-                                                                                                                                                      }
-
-                                                                                                                                                          if (password.length < 8) {
-                                                                                                                                                                alert("Şifre en az 8 karakter");
-                                                                                                                                                                      return;
-                                                                                                                                                                          }
-
-                                                                                                                                                                       
-                                                                                                                                                                    
-                                                                                                                                                                
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
