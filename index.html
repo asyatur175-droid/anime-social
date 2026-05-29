@@ -2,36 +2,131 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Anime Social</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SECURITY -->
-  <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self'; style-src 'self';">
-
-  <link rel="stylesheet" href="css/main.css">
+  <title>Anime Social - Sohbet Platformu</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js"></script>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="logo">ANIME<span>SOCIAL</span></div>
-  <nav>
-    <a href="#">Keşfet</a>
-    <a href="#">Topluluk</a>
-    <a href="login.html" class="btn">Giriş</a>
-  </nav>
-</header>
+<div id="app" class="app-container">
+  <!-- Giriş Ekranı -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-container">
+      <div class="logo-anime">
+        <h1>⚫<span>ANIME</span>⚫</h1>
+        <p>Sosyal Sohbet Platformu</p>
+      </div>
+      
+      <div class="login-box">
+        <h2>Karanlık Tarafına Hoş Geldin</h2>
+        <button id="googleLoginBtn" class="btn btn-google">
+          <span>🔐 Gmail ile Giriş Yap</span>
+        </button>
+        <p class="info-text">Güvenli, anonim ve eğlenceli sohbet deneyimi</p>
+      </div>
+    </div>
+  </div>
 
-<main class="hero">
-  <h1>Karanlık Tarafına Hoş Geldin</h1>
-  <p>Anime severler için güvenli, gerçek ve sosyal bir evren.</p>
-  <a href="login.html" class="cta">Hesap Oluştur</a>
-</main>
+  <!-- Ana Sohbet Ekranı -->
+  <div id="chatScreen" class="screen">
+    <div class="chat-layout">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="user-profile">
+          <img id="userAvatar" src="" alt="Profil" class="avatar-large">
+          <h3 id="userName">Kullanıcı</h3>
+          <button id="logoutBtn" class="btn btn-logout">Çıkış</button>
+        </div>
 
-<footer>
-  © 2026 Anime Social
-</footer>
+        <div class="room-list">
+          <h4>🎌 Odalar</h4>
+          <div id="roomsList" class="rooms-container">
+            <button class="room-btn active" data-room="genel">
+              📢 Genel Sohbet
+            </button>
+            <button class="room-btn" data-room="anime">
+              🎨 Anime Tartışması
+            </button>
+            <button class="room-btn" data-room="gaming">
+              🎮 Gaming
+            </button>
+            <button class="room-btn" data-room="manga">
+              📚 Manga Kulübü
+            </button>
+          </div>
+        </div>
+      </div>
 
-<script type="module" src="js/app.js"></script>
+      <!-- Chat Area -->
+      <div class="chat-area">
+        <div class="chat-header">
+          <h2 id="roomTitle">📢 Genel Sohbet</h2>
+          <div class="header-actions">
+            <button id="voiceCallBtn" class="btn-icon" title="Ses Çağrısı">📞</button>
+            <button id="clearChatBtn" class="btn-icon" title="Temizle">🗑️</button>
+          </div>
+        </div>
+
+        <div id="messagesContainer" class="messages-container">
+          <div class="welcome-msg">
+            <h3>🎌 Anime Social'e Hoş Geldin!</h3>
+            <p>Burası anime severler için güvenli bir sohbet alanıdır.</p>
+          </div>
+        </div>
+
+        <div class="input-area">
+          <div class="media-buttons">
+            <button id="imageUploadBtn" class="btn-small" title="Fotoğraf Yükle">📷</button>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+            <button id="emojiBtn" class="btn-small" title="Emoji">😊</button>
+          </div>
+          <input 
+            type="text" 
+            id="messageInput" 
+            class="message-input" 
+            placeholder="Mesajınız..." 
+            autocomplete="off"
+          >
+          <button id="sendBtn" class="btn-send">Gönder</button>
+        </div>
+      </div>
+
+      <!-- Right Panel - Kullanıcılar & Ses -->
+      <div class="right-panel">
+        <div class="users-online">
+          <h4>👥 Çevrimiçi</h4>
+          <div id="onlineUsers" class="users-list"></div>
+        </div>
+
+        <div id="voicePanel" class="voice-panel hidden">
+          <h4>📞 Ses Çağrısı</h4>
+          <div id="voiceStatus">-</div>
+          <audio id="remoteAudio" autoplay></audio>
+          <button id="endCallBtn" class="btn-danger">Çağrıyı Sonlandır</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Emoji Panel -->
+<div id="emojiPanel" class="emoji-panel hidden">
+  <div class="emoji-grid">
+    😀 😂 😍 🤔 😎 🔥 💯 👍 🎌 🍜 ⚡ 🎮 🎨 💜 ✨ 🌙
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/ui.js"></script>
+
 </body>
 </html>
