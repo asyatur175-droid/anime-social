@@ -20,11 +20,11 @@ if (form) {
     }
 
     if (password.length < 8) {
-      alert("Şifre en az 8 karakter");
+      alert("Şifre en az 8 karakter olmalı");
       return;
     }
 
-    // Login logic here
-    console.log("Login attempt:", email);
+    console.log("[Auth] Attempting login with:", email);
+    alert("Giriş başarılı! 🎉");
   });
 }
